@@ -1,8 +1,10 @@
 from tkinter import *
 from tkinter import Listbox
+from bookshop.backend import DataBase
 
-import backend
 
+db_name = "books.db"
+database = DataBase(db_name)
 window = Tk()
 window.title("Python's Book-Shop ")
 
@@ -12,14 +14,14 @@ def view_command():
     list1.delete(0, END)
 
     # Now we populate the display list with the freshly fetched items of the database!
-    for book in backend.view():
+    for book in database.get_all():
         list1.insert(END, book)  # END means that every ne entry is placed at the END of the list!
 
 
 def search_command():
     # Ensure that the listbox is empty before adding the fresh values of the database!
     list1.delete(0, END)
-    for found in backend.search(title_text.get(),
+    for found in database.search(title_text.get(),
                                 author_text.get(),
                                 year_text.get(),
                                 isbn_text.get()
@@ -28,7 +30,7 @@ def search_command():
 
 
 def add_book_command():
-    backend.insert(title_text.get(),
+    database.insert(title_text.get(),
                    author_text.get(),
                    year_text.get(),
                    isbn_text.get())
@@ -39,14 +41,14 @@ def add_book_command():
 
 def delete_book_command():
     if selected_list_item is not None:
-        backend.delete(selected_list_item[0])
+        database.delete(selected_list_item[0])
         clear_entries()
         view_command()
 
 
 def update_book_command():
     if selected_list_item is not None:
-        backend.update(
+        database.update(
             selected_list_item[0],
             entry_title.get(),
             entry_author.get(),
