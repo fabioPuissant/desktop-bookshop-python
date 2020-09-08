@@ -67,21 +67,22 @@ def clear_entries():
 
 def get_selected_row(event):
     global selected_list_item
-    index = int(list1.curselection()[0])
-    selected_list_item = list1.get(index)
+    if list1.curselection():
+        index = int(list1.curselection()[0])
+        selected_list_item = list1.get(index)
 
-    # Display which one is selected!
-    entry_title.delete(0,END)
-    entry_title.insert(END, selected_list_item[1])
+        # Display which one is selected!
+        entry_title.delete(0,END)
+        entry_title.insert(END, selected_list_item[1])
 
-    entry_author.delete(0, END)
-    entry_author.insert(END, selected_list_item[2])
+        entry_author.delete(0, END)
+        entry_author.insert(END, selected_list_item[2])
 
-    entry_year.delete(0, END)
-    entry_year.insert(END, selected_list_item[3])
+        entry_year.delete(0, END)
+        entry_year.insert(END, selected_list_item[3])
 
-    entry_isbn.delete(0, END)
-    entry_isbn.insert(END, selected_list_item[4])
+        entry_isbn.delete(0, END)
+        entry_isbn.insert(END, selected_list_item[4])
 
 
 def close_window_command():
