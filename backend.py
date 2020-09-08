@@ -31,7 +31,7 @@ def view():
 def search(title="", author="", year="", isbn=""):
     conn = sqlite3.connect("books.db")
     cur = conn.cursor()
-    cur.execute("SELECT * FROM book WHERE title=? OR author=? OR isbn=?", (title, author, year, isbn))
+    cur.execute("SELECT * FROM book WHERE title=? OR author=? OR year=? OR isbn=?", (title, author, year, isbn))
     rows = cur.fetchall()
     conn.close()
     return rows
@@ -54,5 +54,6 @@ def update(id, title, author, year, isbn):
 
 
 connect()
-insert("HARRY POTTER", "J.K. Rowling", 2000, 122333)
-print(view())
+#insert("The sea", "John Smppt", 1918, 912323458)
+#insert("HARRY POTTER", "J.K. Rowling", 2000, 122333)
+
