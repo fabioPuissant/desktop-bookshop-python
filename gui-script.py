@@ -1,6 +1,12 @@
 from tkinter import *
+import backend
 
 window = Tk()
+
+def view_command():
+    for book in backend.view():
+        list1.insert(END, book) # END means that every ne entry is placed at the END of the list!
+
 
 # The labels
 label_1 = Label(window, text="Title")
@@ -40,7 +46,7 @@ scrollbar.grid(row=2, column=2)
 list1.configure(yscrollcommand= scrollbar.set)
 scrollbar.config(command=list1.yview)
 
-button_view_all = Button(window, text="View all", width=12)
+button_view_all = Button(window, text="View all", width=12, command=view_command)
 button_view_all.grid(row= 2, column=3)
 
 button_search_entry = Button(window, text="Search entry", width=12)
